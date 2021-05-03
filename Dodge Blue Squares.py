@@ -42,7 +42,7 @@ enemy_pos = [random.randint(0, WIDTH-enemy_size), 100]  # position of first blue
 enemy_list = [enemy_pos]
 
 SPEED = 7
-score = 60  # should be 0
+score = 0  # should be 0
 num_enemies = 5
 level = 1  # should be 1
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -54,7 +54,7 @@ game_over = False
 clock = pygame.time.Clock()
 
 
-def set_level(score: int, player_pos: List[int, int]) -> int:
+def set_level(score: int, player_pos: List[int]) -> int:
     """
     Change SPEED, number of blue boxes, and level as required.
     :param score: current score
@@ -188,7 +188,7 @@ def scores() -> None:
               str(high_scores[i]).ljust(20, ' '))  # Prints the high scores
 
 
-def drop_enemies(enemy_list: List[List[int, int]]) -> None:
+def drop_enemies(enemy_list: List[List[int]]) -> None:
     """
     Append to <enemy_list> if there are not enough blue boxes on the screen.
     :param enemy_list: List of blue boxes
@@ -201,7 +201,7 @@ def drop_enemies(enemy_list: List[List[int, int]]) -> None:
         enemy_list.append([x_pos, y_pos])
 
 
-def draw_enemies(enemy_list: List[List[int, int]]):
+def draw_enemies(enemy_list: List[List[int]]):
     """
     Draw the blue boxes to the screen
     :param enemy_list: List of blue boxes
@@ -215,7 +215,7 @@ def draw_enemies(enemy_list: List[List[int, int]]):
             pygame.draw.rect(screen, WHITE, (enemy_pos[0], enemy_pos[1], enemy_size, enemy_size))
 
 
-def update_enemy_positions(enemy_list: List[List[int, int]]) -> int:
+def update_enemy_positions(enemy_list: List[List[int]]) -> int:
     """
     Update the positions of the blue boxes. If a blue box goes past the player,
     increment the score by 1.
@@ -237,7 +237,7 @@ def update_enemy_positions(enemy_list: List[List[int, int]]) -> int:
     return score
 
 
-def collision_check(enemy_list: List[List[int, int]], player_pos: List[int, int]) -> bool:
+def collision_check(enemy_list: List[List[int]], player_pos: List[int]) -> bool:
     """
     :param enemy_list: List of blue boxes
     :param player_pos: Position of the player
@@ -249,7 +249,7 @@ def collision_check(enemy_list: List[List[int, int]], player_pos: List[int, int]
     return False
 
 
-def detect_collision(player_pos: List[int, int], enemy_pos: List[int, int]) -> bool:
+def detect_collision(player_pos: List[int], enemy_pos: List[int]) -> bool:
     """
     :param player_pos: Position of the player
     :param enemy_pos: Position of a blue box
